@@ -172,6 +172,7 @@ public class TreatyConverter
             {
                 var day = match.Groups[1].Value;
                 var month = match.Groups[2].Value;
+                var shortMonth = ConvertToShortMonth(match.Groups[2].Value);
                 var year = match.Groups[3].Value;
 
                 // Create the date text content
@@ -179,7 +180,7 @@ public class TreatyConverter
 
                 var dateElement = new XElement(core + "date",
                     new XAttribute("day", day),
-                    new XAttribute("month", month),
+                    new XAttribute("month", shortMonth),
                     new XAttribute("year", year),
                     dateText);  // Add date text as content
 
@@ -274,13 +275,13 @@ public class TreatyConverter
 
                     if (className.Contains("indent-3"))
                     {
-                        element = new XElement(lnbLeg + "para3",
+                        element = new XElement(lnbLeg + "para4",
                             new XElement(core + "enum", enumValue),
                             content);
                     }
                     else if (className.Contains("indent-2"))
                     {
-                        element = new XElement(lnbLeg + "para2",
+                        element = new XElement(lnbLeg + "para3",
                             new XElement(core + "enum", enumValue),
                             content);
                     }
@@ -367,12 +368,38 @@ public class TreatyConverter
         {
             return (
                 int.Parse(match.Groups[1].Value),
-                match.Groups[2].Value,
+                ConvertToShortMonth(match.Groups[2].Value),
                 int.Parse(match.Groups[3].Value)
             );
         }
 
         return (1, "Jan", 2000); // Default
+    }
+
+    private static string ConvertToShortMonth(string month)
+    {
+        // Convert full month names to 3-letter abbreviations
+        var monthMap = new System.Collections.Generic.Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "January", "Jan" },
+            { "February", "Feb" },
+            { "March", "Mar" },
+            { "April", "Apr" },
+            { "May", "May" },
+            { "June", "Jun" },
+            { "July", "Jul" },
+            { "August", "Aug" },
+            { "September", "Sep" },
+            { "October", "Oct" },
+            { "November", "Nov" },
+            { "December", "Dec" }
+        };
+
+        // If already short form or found in map, return appropriate value
+        if (month.Length == 3)
+            return month;
+        
+        return monthMap.TryGetValue(month, out var shortMonth) ? shortMonth : month;
     }
 }
 

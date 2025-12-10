@@ -10,9 +10,9 @@
             <core:title>Agreement between The Government Ofthe People’s Republic of China And The Government Ofthe United Kingdom Ofgreat Britainand Northern Ireland for Theavoidance of Double Taxationand The Prevention of Fiscal Evasion with Respect to Taxes on Income And on Capital Gains, Amended by Protocol of 2013</core:title>
           </lnb-leg:officialname>
           <lnb-leg:approval>Status: In Force</lnb-leg:approval>
-          <lnb-leg:laid>Signature Date: <core:date day="27" month="June" year="2011">27 June 2011</core:date></lnb-leg:laid>
-          <lnb-leg:made>Entry into Force: <core:date day="13" month="December" year="2013">13 December 2013</core:date></lnb-leg:made>
-          <lnb-leg:operation>Effective Date: <core:date day="1" month="January" year="2014">1 January 2014</core:date> (China)<core:date day="1" month="April" year="2014">1 April 2014</core:date> (United Kingdom)</lnb-leg:operation>
+          <lnb-leg:laid>Signature Date: <core:date day="27" month="Jun" year="2011">27 June 2011</core:date></lnb-leg:laid>
+          <lnb-leg:made>Entry into Force: <core:date day="13" month="Dec" year="2013">13 December 2013</core:date></lnb-leg:made>
+          <lnb-leg:operation>Effective Date: <core:date day="1" month="Jan" year="2014">1 January 2014</core:date> (China)<core:date day="1" month="Apr" year="2014">1 April 2014</core:date> (United Kingdom)</lnb-leg:operation>
         </lnb-leg:prelims>
         <lnb-leg:preamble>
           <lnb-leg:para1>The Government of the People’s Republic of China and the Government of the United Kingdom of Great Britain and Northern Ireland,</lnb-leg:para1>
@@ -36,19 +36,19 @@
               <core:enum>3.</core:enum>The existing taxes to which the Agreement shall apply are in particular:</lnb-leg:para1>
             <lnb-leg:para2>
               <core:enum>a)</core:enum>in China:</lnb-leg:para2>
-            <lnb-leg:para2>
-              <core:enum>(i)</core:enum>the individual income tax;</lnb-leg:para2>
-            <lnb-leg:para2>
-              <core:enum>(ii)</core:enum>the enterprise income tax;</lnb-leg:para2>
+            <lnb-leg:para3>
+              <core:enum>(i)</core:enum>the individual income tax;</lnb-leg:para3>
+            <lnb-leg:para3>
+              <core:enum>(ii)</core:enum>the enterprise income tax;</lnb-leg:para3>
             <lnb-leg:para1>(hereinafter referred to as “Chinese tax”);</lnb-leg:para1>
             <lnb-leg:para2>
               <core:enum>b)</core:enum>in the United Kingdom:</lnb-leg:para2>
-            <lnb-leg:para2>
-              <core:enum>(i)</core:enum>the income tax;</lnb-leg:para2>
-            <lnb-leg:para2>
-              <core:enum>(ii)</core:enum>the corporation tax;</lnb-leg:para2>
-            <lnb-leg:para2>
-              <core:enum>(iii)</core:enum>the capital gains tax;</lnb-leg:para2>
+            <lnb-leg:para3>
+              <core:enum>(i)</core:enum>the income tax;</lnb-leg:para3>
+            <lnb-leg:para3>
+              <core:enum>(ii)</core:enum>the corporation tax;</lnb-leg:para3>
+            <lnb-leg:para3>
+              <core:enum>(iii)</core:enum>the capital gains tax;</lnb-leg:para3>
             <lnb-leg:para1>(hereinafter referred to as “United Kingdom tax”).</lnb-leg:para1>
             <lnb-leg:para1>
               <core:enum>4.</core:enum>The Agreement shall also apply to any identical or substantially similar taxes which are imposed after the date of signature of the Agreement in addition to, or in place of, the existing taxes. The competent authorities of the Contracting States shall notify each other of any significant changes which have been made in their taxation laws within a reasonable period of time after such changes.</lnb-leg:para1>
@@ -76,10 +76,10 @@
               <core:enum>h)</core:enum>the term “competent authority” means, in the case of China, the State Administration of Taxation or its authorised representative, and in the case of the United Kingdom, the Commissioners for Her Majesty’s Revenue and Customs or their authorised representative;</lnb-leg:para2>
             <lnb-leg:para2>
               <core:enum>i)</core:enum>the term “national” means:</lnb-leg:para2>
-            <lnb-leg:para2>
-              <core:enum>(i)</core:enum>in relation to China, any individual who under the law in China possesses Chinese nationality; and any legal person, partnership or other body of persons deriving its status as such from the law in force in China;</lnb-leg:para2>
-            <lnb-leg:para2>
-              <core:enum>(ii)</core:enum>in relation to the United Kingdom, any British citizen, or any British subject not possessing the citizenship of any other Commonwealth country or territory, provided he has the right of abode in the United Kingdom; and any legal person, partnership, association or other entity deriving its status as such from the laws in force in the United Kingdom.</lnb-leg:para2>
+            <lnb-leg:para3>
+              <core:enum>(i)</core:enum>in relation to China, any individual who under the law in China possesses Chinese nationality; and any legal person, partnership or other body of persons deriving its status as such from the law in force in China;</lnb-leg:para3>
+            <lnb-leg:para3>
+              <core:enum>(ii)</core:enum>in relation to the United Kingdom, any British citizen, or any British subject not possessing the citizenship of any other Commonwealth country or territory, provided he has the right of abode in the United Kingdom; and any legal person, partnership, association or other entity deriving its status as such from the laws in force in the United Kingdom.</lnb-leg:para3>
             <lnb-leg:para1>
               <core:enum>2.</core:enum>As regards the application of the Agreement at any time by a Contracting State, any term not defined therein shall, unless the context otherwise requires, have the meaning that it has at that time under the law of that State for the purposes of the taxes to which this Agreement applies, any meaning under the applicable tax laws of that State prevailing over a meaning given to the term under other laws of that State.</lnb-leg:para1>
           </lnb-leg:provision>
@@ -353,10 +353,10 @@
               <core:enum>a)</core:enum>Salaries, wages and other similar remuneration, other than a pension, paid by a Contracting State or a political subdivision or a local authority thereof to an individual in respect of services rendered to that State or subdivision or authority shall be taxable only in that State.</lnb-leg:para2>
             <lnb-leg:para2>
               <core:enum>b)</core:enum>However, such salaries, wages and other similar remuneration shall be taxable only in the other Contracting State if the services are rendered in that State and the individual is a resident of that State who:</lnb-leg:para2>
-            <lnb-leg:para2>
-              <core:enum>(i)</core:enum>is a national of that State; or</lnb-leg:para2>
-            <lnb-leg:para2>
-              <core:enum>(ii)</core:enum>did not become a resident of that State solely for the purpose of rendering the services.</lnb-leg:para2>
+            <lnb-leg:para3>
+              <core:enum>(i)</core:enum>is a national of that State; or</lnb-leg:para3>
+            <lnb-leg:para3>
+              <core:enum>(ii)</core:enum>did not become a resident of that State solely for the purpose of rendering the services.</lnb-leg:para3>
             <lnb-leg:para1>
               <core:enum>2.</core:enum>
             </lnb-leg:para1>
@@ -471,10 +471,10 @@
               <core:enum>a)</core:enum>in China, in respect of profit, income and capital gains arising in any tax year beginning on or after 1st January in the calendar year next following that in which this Agreement enters into force;</lnb-leg:para2>
             <lnb-leg:para2>
               <core:enum>b)</core:enum>in the United Kingdom,</lnb-leg:para2>
-            <lnb-leg:para2>
-              <core:enum>(i)</core:enum>in respect of income tax and capital gains tax, for any year of assessment beginning on or after 6th April next following the date on which this Agreement enters into force;</lnb-leg:para2>
-            <lnb-leg:para2>
-              <core:enum>(ii)</core:enum>in respect of corporation tax, for any financial year beginning on or after 1st April next following the date on which this Agreement enters into force;</lnb-leg:para2>
+            <lnb-leg:para3>
+              <core:enum>(i)</core:enum>in respect of income tax and capital gains tax, for any year of assessment beginning on or after 6th April next following the date on which this Agreement enters into force;</lnb-leg:para3>
+            <lnb-leg:para3>
+              <core:enum>(ii)</core:enum>in respect of corporation tax, for any financial year beginning on or after 1st April next following the date on which this Agreement enters into force;</lnb-leg:para3>
             <lnb-leg:para1>
               <core:enum>2.</core:enum>The Agreement between the Government of the People’s Republic of China and the Government of the United Kingdom of Great Britain and Northern Ireland for the Reciprocal Avoidance of Double Taxation and the Prevention of Fiscal Evasion with Respect to Taxes on Income and Capital Gains, signed at Beijing on July 26th, 1984, as amended by the protocol signed at Beijing on September 2nd 1996 (the prior Agreement) shall cease to have effect in relation to any tax with effect from the date on which this Agreement has effect in relation to that tax in accordance with paragraph 1 of this Article.</lnb-leg:para1>
             <lnb-leg:para1>
@@ -488,10 +488,10 @@
               <core:enum>a)</core:enum>in China, as regards profits, income and capital gains derived during the tax year beginning on or after 1st January in the calendar year next following that in which the notice is given;</lnb-leg:para2>
             <lnb-leg:para2>
               <core:enum>b)</core:enum>in the United Kingdom,</lnb-leg:para2>
-            <lnb-leg:para2>
-              <core:enum>(i)</core:enum>in respect of income tax and capital gains tax, for any year of assessment beginning on or after 6th April next following the date on which the notice is given;</lnb-leg:para2>
-            <lnb-leg:para2>
-              <core:enum>(ii)</core:enum>in respect of corporation tax, for any financial year beginning on or after 1st April next following the date on which the notice is given.</lnb-leg:para2>
+            <lnb-leg:para3>
+              <core:enum>(i)</core:enum>in respect of income tax and capital gains tax, for any year of assessment beginning on or after 6th April next following the date on which the notice is given;</lnb-leg:para3>
+            <lnb-leg:para3>
+              <core:enum>(ii)</core:enum>in respect of corporation tax, for any financial year beginning on or after 1st April next following the date on which the notice is given.</lnb-leg:para3>
             <lnb-leg:para1></lnb-leg:para1>
             <lnb-leg:para1>IN WITNESS whereof the undersigned, duly authorised thereto, have signed this Agreement.</lnb-leg:para1>
             <lnb-leg:para1>DONE at on the day of , , in duplicate in the Chinese and English languages, both texts being equally authoritative.</lnb-leg:para1>
