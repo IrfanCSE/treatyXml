@@ -10,12 +10,12 @@ public class TreatyConverter
     public static XDocument ConvertTreatyJsonToXml(string jsonContent)
     {
         var treaty = JsonSerializer.Deserialize<TreatyData>(jsonContent);
-        
+
         // Create XML namespaces
         XNamespace core = "http://www.lexisnexis.com/namespace/sslrp/core";
         XNamespace lnbLeg = "http://www.lexisnexis.com/namespace/sslrp/lnb-leg";
         XNamespace tr = "http://www.lexisnexis.com/namespace/sslrp/tr";
-        
+
         // Create root element with all namespaces
         var root = new XElement(tr + "ch",
             new XAttribute(XNamespace.Xmlns + "core", core.NamespaceName),
@@ -41,52 +41,84 @@ public class TreatyConverter
             new XAttribute(XNamespace.Xmlns + "su", "http://www.lexisnexis.com/namespace/sslrp/su"),
             new XAttribute(XNamespace.Xmlns + "tr", tr.NamespaceName)
         );
-        
+
         // Add no-title element
         root.Add(new XElement(core + "no-title"));
-        
+
         // Create legislation structure
         var legislation = new XElement(lnbLeg + "legislation",
             new XElement(lnbLeg + "international-legislation",
                 new XElement(lnbLeg + "international-agreement")));
-        
+
         var agreement = legislation.Descendants(lnbLeg + "international-agreement").First();
-        
+
         // Add prelims section
         var prelims = CreatePrelims(treaty, core, lnbLeg);
         agreement.Add(prelims);
-        
+
         // Add preamble section
         var preamble = CreatePreamble(treaty.Initials, lnbLeg);
         agreement.Add(preamble);
-        
+
         // Add main section with articles
         var main = CreateMain(treaty.Articles, core, lnbLeg);
         agreement.Add(main);
-        
+
         root.Add(legislation);
-        
+
         // Create document with DOCTYPE
         var doc = new XDocument(
-            new XDocumentType("tr:ch", "-//LEXISNEXIS//DTD PLUTO v018//EN//XML", 
+            new XDocumentType("tr:ch", "-//LEXISNEXIS//DTD PLUTO v018//EN//XML",
                 "C:\\Neptune\\NeptuneEditor\\doctypes\\plutoV018-0000\\plutoV018-0000.dtd", null),
             root
         );
-        
+
         return doc;
     }
-    
+
+    private static string NormalizeText(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return text;
+
+        // Define common prepositions to keep lowercase
+        var prepositions = new[] { "of", "in", "on", "at", "to", "for", "with", "from", "by", "about", "as", "into", "through", "during", "before", "after", "above", "below", "between", "under", "over" };
+
+        // Split text into words and capitalize appropriately
+        var words = text.Split(' ');
+        for (int i = 0; i < words.Length; i++)
+        {
+            if (!string.IsNullOrEmpty(words[i]))
+            {
+                var lowerWord = words[i].ToLower();
+                // Keep prepositions lowercase unless they're the first word
+                if (i > 0 && prepositions.Contains(lowerWord))
+                {
+                    words[i] = lowerWord;
+                }
+                else
+                {
+                    words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+                }
+            }
+        }
+        text = string.Join(" ", words);
+
+        // Trim leading and trailing whitespace
+        return text.Trim();
+    }
+
     private static XElement CreatePrelims(TreatyData treaty, XNamespace core, XNamespace lnbLeg)
     {
         var prelims = new XElement(lnbLeg + "prelims");
-        
+
         // Official name
         prelims.Add(new XElement(lnbLeg + "officialname",
-            new XElement(core + "title", treaty.Title)));
-        
+            new XElement(core + "title", NormalizeText(treaty.Title))));
+
         // Status
         prelims.Add(new XElement(lnbLeg + "approval", $"Status: {treaty.Status}"));
-        
+
         // Signature date
         if (!string.IsNullOrEmpty(treaty.SignatureDate))
         {
@@ -99,7 +131,7 @@ public class TreatyConverter
                     new XAttribute("year", sigDate.Year),
                     treaty.SignatureDate)));
         }
-        
+
         // Entry into force
         if (!string.IsNullOrEmpty(treaty.EntryIntoForce))
         {
@@ -112,135 +144,134 @@ public class TreatyConverter
                     new XAttribute("year", entryDate.Year),
                     treaty.EntryIntoForce)));
         }
-        
+
         // Effective date
         if (!string.IsNullOrEmpty(treaty.EffectiveDate))
         {
             prelims.Add(new XElement(lnbLeg + "operation",
                 CreateEffectiveDateElements(treaty.EffectiveDate, core)));
         }
-        
+
         return prelims;
     }
-    
+
     private static object[] CreateEffectiveDateElements(string effectiveDate, XNamespace core)
     {
         var elements = new System.Collections.Generic.List<object>();
         elements.Add("Effective Date: ");
-        
+
         // Parse multiple dates if separated by semicolon
         var parts = effectiveDate.Split(';');
-        
+
         foreach (var part in parts)
         {
             var trimmed = part.Trim();
             var match = Regex.Match(trimmed, @"(\d+)\s+(\w+)\s+(\d{4})");
-            
+
             if (match.Success)
             {
                 var day = match.Groups[1].Value;
                 var month = match.Groups[2].Value;
                 var year = match.Groups[3].Value;
-                
+
+                // Create the date text content
+                var dateText = $"{day} {month} {year}";
+
                 var dateElement = new XElement(core + "date",
                     new XAttribute("day", day),
                     new XAttribute("month", month),
-                    new XAttribute("year", year));
-                
-                // Add the date text
-                var dateText = $"{day} {month} {year}";
+                    new XAttribute("year", year),
+                    dateText);  // Add date text as content
+
                 var remainingText = trimmed.Substring(trimmed.IndexOf(year) + 4).Trim();
-                
+
+                elements.Add(dateElement);
+
                 if (!string.IsNullOrEmpty(remainingText))
                 {
-                    elements.Add(dateElement);
                     elements.Add($" {remainingText}");
-                }
-                else
-                {
-                    elements.Add(dateElement);
                 }
             }
         }
-        
+
         return elements.ToArray();
     }
-    
+
     private static XElement CreatePreamble(string initials, XNamespace lnbLeg)
     {
         var preamble = new XElement(lnbLeg + "preamble");
-        
+
         if (!string.IsNullOrEmpty(initials))
         {
             // Parse HTML paragraphs
             var paragraphs = ParseHtmlParagraphs(initials);
-            
+
             foreach (var paragraph in paragraphs)
             {
                 preamble.Add(new XElement(lnbLeg + "para1", paragraph));
             }
         }
-        
+
         return preamble;
     }
-    
+
     private static XElement CreateMain(Article[] articles, XNamespace core, XNamespace lnbLeg)
     {
         var main = new XElement(lnbLeg + "main");
-        
+
         foreach (var article in articles)
         {
             var provision = new XElement(lnbLeg + "provision");
-            
+
             // Add article number
             provision.Add(new XElement(core + "desig",
                 new XAttribute("value", article.ArticleNumber),
                 article.ArticleNumber));
-            
+
             // Add article title
             provision.Add(new XElement(core + "title", article.ArticleTitle));
-            
+
             // Parse and add article content
             if (!string.IsNullOrEmpty(article.ArticleDescription))
             {
                 var contentElements = ParseArticleContent(article.ArticleDescription, core, lnbLeg);
                 provision.Add(contentElements);
             }
-            
+
             main.Add(provision);
         }
-        
+
         return main;
     }
-    
+
     private static XElement[] ParseArticleContent(string html, XNamespace core, XNamespace lnbLeg)
     {
         var elements = new System.Collections.Generic.List<XElement>();
-        
+
         // Sanitize HTML before parsing
         html = SanitizeHtml(html);
-        
+
         // Remove outer <p> tags and split by paragraph
         var doc = new XmlDocument();
         doc.LoadXml($"<root>{html}</root>");
-        
+
         foreach (XmlNode node in doc.DocumentElement.ChildNodes)
         {
             if (node.Name == "p")
             {
                 var className = node.Attributes?["class"]?.Value ?? "";
                 var text = node.InnerText;
-                
+
                 // Detect enumeration pattern
                 var enumMatch = Regex.Match(text, @"^(\d+\.|[a-z]\)|\([ivx]+\))\s*(.*)$", RegexOptions.Singleline);
-                
+
                 if (enumMatch.Success)
                 {
                     var enumValue = enumMatch.Groups[1].Value;
                     var content = enumMatch.Groups[2].Value;
-                    
+
                     XElement element;
-                    
+
                     if (className.Contains("indent-3"))
                     {
                         element = new XElement(lnbLeg + "para3",
@@ -265,7 +296,7 @@ public class TreatyConverter
                             new XElement(core + "enum", enumValue),
                             content);
                     }
-                    
+
                     elements.Add(element);
                 }
                 else
@@ -275,22 +306,22 @@ public class TreatyConverter
                 }
             }
         }
-        
+
         return elements.ToArray();
     }
-    
+
     private static string[] ParseHtmlParagraphs(string html)
     {
         var paragraphs = new System.Collections.Generic.List<string>();
-        
+
         try
         {
             // Sanitize HTML before parsing
             html = SanitizeHtml(html);
-            
+
             var doc = new XmlDocument();
             doc.LoadXml($"<root>{html}</root>");
-            
+
             foreach (XmlNode node in doc.DocumentElement.ChildNodes)
             {
                 if (node.Name == "p")
@@ -307,31 +338,31 @@ public class TreatyConverter
                 .Select(p => p.Trim())
                 .Where(p => !string.IsNullOrEmpty(p)));
         }
-        
+
         return paragraphs.ToArray();
     }
-    
+
     private static string SanitizeHtml(string html)
     {
         if (string.IsNullOrEmpty(html))
             return html;
-        
+
         // Replace self-closing tags with proper closing tags
-        html = Regex.Replace(html, @"<br\s*/?>" , "<br></br>", RegexOptions.IgnoreCase);
-        html = Regex.Replace(html, @"<hr\s*/?>" , "<hr></hr>", RegexOptions.IgnoreCase);
+        html = Regex.Replace(html, @"<br\s*/?>", "<br></br>", RegexOptions.IgnoreCase);
+        html = Regex.Replace(html, @"<hr\s*/?>", "<hr></hr>", RegexOptions.IgnoreCase);
         html = Regex.Replace(html, @"<img([^>]*)/?>", "<img$1></img>", RegexOptions.IgnoreCase);
-        
+
         // Handle common HTML entities
         html = html.Replace("&nbsp;", "&#160;");
         html = html.Replace("&", "&amp;").Replace("&amp;amp;", "&amp;").Replace("&amp;#", "&#");
-        
+
         return html;
     }
-    
+
     private static (int Day, string Month, int Year) ParseDate(string dateStr)
     {
         var match = Regex.Match(dateStr, @"(\d+)\s+(\w+)\s+(\d{4})");
-        
+
         if (match.Success)
         {
             return (
@@ -340,7 +371,7 @@ public class TreatyConverter
                 int.Parse(match.Groups[3].Value)
             );
         }
-        
+
         return (1, "Jan", 2000); // Default
     }
 }
