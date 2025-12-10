@@ -1,0 +1,14 @@
+h:\Github\Converter\TreatyXml\bin\Debug\net6.0\TreatyXml.exe
+h:\Github\Converter\TreatyXml\bin\Debug\net6.0\TreatyXml.deps.json
+h:\Github\Converter\TreatyXml\bin\Debug\net6.0\TreatyXml.runtimeconfig.json
+h:\Github\Converter\TreatyXml\bin\Debug\net6.0\TreatyXml.dll
+h:\Github\Converter\TreatyXml\bin\Debug\net6.0\TreatyXml.pdb
+h:\Github\Converter\TreatyXml\obj\Debug\net6.0\TreatyXml.GeneratedMSBuildEditorConfig.editorconfig
+h:\Github\Converter\TreatyXml\obj\Debug\net6.0\TreatyXml.AssemblyInfoInputs.cache
+h:\Github\Converter\TreatyXml\obj\Debug\net6.0\TreatyXml.AssemblyInfo.cs
+h:\Github\Converter\TreatyXml\obj\Debug\net6.0\TreatyXml.csproj.CoreCompileInputs.cache
+h:\Github\Converter\TreatyXml\obj\Debug\net6.0\TreatyXml.dll
+h:\Github\Converter\TreatyXml\obj\Debug\net6.0\refint\TreatyXml.dll
+h:\Github\Converter\TreatyXml\obj\Debug\net6.0\TreatyXml.pdb
+h:\Github\Converter\TreatyXml\obj\Debug\net6.0\TreatyXml.genruntimeconfig.cache
+h:\Github\Converter\TreatyXml\obj\Debug\net6.0\ref\TreatyXml.dll
