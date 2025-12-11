@@ -1,9 +1,15 @@
 ﻿using System.Xml;
 using System.Xml.Linq;
+using TreatyXml.Converters;
 
+// Create converter instance
+var converter = new TreatyXmlConverter();
+
+// Read JSON content
 string jsonContent = System.IO.File.ReadAllText("H:\\Github\\Converter\\TreatyXml\\treaty.json");
 
-XDocument xmlDoc = TreatyConverter.ConvertTreatyJsonToXml(jsonContent);
+// Convert to XML
+XDocument xmlDoc = converter.ConvertToXml(jsonContent);
 
 // Save with proper formatting
 var settings = new XmlWriterSettings
